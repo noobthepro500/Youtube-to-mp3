@@ -1,137 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-
-*{
-  padding: 0;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-body{
-  color: white;
+.container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  font-family: 'Orbitron', sans-serif;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px;
 }
 
-.top-container{
-  height: 40vh;
-  background-color: red;
+header {
+  margin-bottom: 20px;
 }
 
-.bottom-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 30px;
+header h1 {
+  font-size: 2em;
+  color: #ff0000;
 }
 
-#form{
-  width: 600px;
-  height: 40vh;
-  margin: auto;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 20px;
+header p {
+  color: #555;
 }
 
-#form h1{
-  font-style: italic;
-  text-shadow: 1px 1px darkgray;
+.form-group {
+  margin-bottom: 20px;
 }
 
-#form input{
-  width: 300px;
-  padding: 14px;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border: 1px solid lightgray;
-  font-family: inherit;
-  outline: none;
-  box-shadow: 2px 2px 5px gray;
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-#form button{
-  padding: 14px;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  border: 1px solid lightgray;
-  background-color: whitesmoke;
+.form-group input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.form-group button {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-family: inherit;
-  box-shadow: 2px 3px 5px gray;
-  transition: 0.3s ease-out;
 }
 
-#form button:hover{
-  color:white;
-  background-color:  red;
-  border: 1px solid  red;
-  transform: scale(1.1);
+.form-group button:hover {
+  background-color: #cc0000;
 }
 
-.errors{
-  width: 400px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  flex-direction: column;
-  gap: 10px;
-  border-radius: 5px;
-  padding: 12px;
-  color: red;
-  background-color: #ffe6e6;
-  border: 1px solid red;
+.progress-container {
+  width: 100%;
+  background-color: #f3f3f3;
+  margin-top: 20px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.success{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-  color: black;
-}
-
-#download-btn{
-  width: fit-content;
-  color: black;
-  padding: 12px;
+.progress-bar {
+  width: 0%;
+  height: 30px;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 30px;
   color: white;
-  background-color: red;
-  border-radius: 5px;
+  transition: width 0.5s ease; /* Add this line for smooth transition */
+}
+
+.result-container {
+  margin-top: 20px;
+}
+
+.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.errors {
+  background-color: #f2dede;
+  color: #a94442;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
   text-decoration: none;
-  box-shadow: 2px 2px 5px gray;
-  font-style: normal;
-  cursor: pointer;
-  letter-spacing: 1px;
-  font-family: inherit;
-  border: 1px solid red;
-  transition: 0.3s ease-out;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
-#download-btn:hover{
-  color:black;
-  background-color:  white;
-  border: 1px solid  lightgray;
-  transform: scale(1.1);
+.download-btn:hover {
+  background-color: #45a049;
 }
 
-@media(max-width:768px){
-  .bottom-container{
-    width: 90%;
-    margin: auto;
-  }
-
-  #form, .success{
-    text-align: center;
-    width: 100%;
-  }
-}
-
-@media(max-width:480px){
-  #form input{
-    width: 50%;
-  }
+footer {
+  margin-top: 20px;
+  color: #777;
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,29 +9,40 @@
   <link rel="stylesheet" href="/css/styles.css">
   <title>YouTube 2 MP3</title>
 </head>
-
 <body>
-  <div class="top-container">
-    <form action="/convert-mp3" method="POST" id="form">
+  <div class="container">
+    <header>
       <h1><i class="fab fa-youtube"></i> YouTube to MP3 Converter</h1>
-      <h4>Enter the video ID</h4>
-      <div>
-        <input type="text" name="videoId" placeholder="Video ID..."><button id="submit-btn">Convert</button>
+      <p>Convert your favorite YouTube videos to MP3 format quickly and easily.</p>
+    </header>
+    <main>
+      <form action="/convert-mp3" method="POST" id="form">
+        <div class="form-group">
+          <label for="videoId">Enter the video ID</label>
+          <input type="text" name="videoId" id="videoId" placeholder="Video ID...">
+          <button id="submit-btn">Convert</button>
+        </div>
+      </form>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
       </div>
-    </form>
+      <div class="result-container">
+        <% if (typeof success != "undefined" && success) { %>
+          <div class="success">
+            <p><strong>Title:</strong> <%= song_title %></p>
+            <a href="<%= song_link %>" class="download-btn">Download MP3</a>
+          </div>
+        <% } else if (typeof success != "undefined" && !success) { %>
+          <div class="errors">
+            <p><%= message %></p>
+          </div>
+        <% } %>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2023 YouTube to MP3 Converter. All rights reserved.</p>
+    </footer>
   </div>
-
-  <div class="bottom-container">
-    <% if (typeof success != "undefined" && success) { %>
-      <div class="success">
-        <p> <%= song_title %> </p>
-        <a href="<%= song_link %>"><button id="download-btn">Download!</button></a>
-      </div>
-    <% } else if (typeof success != "undefined" && !success) { %>
-      <div class="errors">
-        <p> <%= message %> </p>
-      </div>
-    <% } %>
-  </div>
+  <script src="/js/progress.js"></script>
 </body>
 </html>
