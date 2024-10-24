@@ -1,22 +1,40 @@
 function convertVideo(format) {
     const url = document.getElementById('youtube-url').value;
+    const messageElement = document.getElementById('message');
+
     if (!url) {
-        alert('Please enter a YouTube URL');
+        showMessage('Please enter a YouTube URL', 'error');
         return;
     }
-    fetch(`/convert?url=${encodeURIComponent(url)}&format=${format}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('message').innerHTML = `
-                    <a href="${data.file}" download>Download ${format.toUpperCase()}</a>
-                `;
-            } else {
-                document.getElementById('message').textContent = data.error;
-            }
-        })
-        .catch(error => {
-            document.getElementById('message').textContent = 'An error occurred';
-            console.error('Error:', error);
-        });
+
+    showMessage('Converting... Please wait.', 'info');
+
+    fetch('/convert', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url, format }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showMessage(`
+                Conversion successful! 
+                <a href="${data.file}" download>Download ${format.toUpperCase()}</a>
+            `, 'success');
+        } else {
+            showMessage(`Error: ${data.error}`, 'error');
+        }
+    })
+    .catch(error => {
+        showMessage(`An error occurred: ${error.message}`, 'error');
+        console.error('Error:', error);
+    });
+}
+
+function showMessage(message, type) {
+    const messageElement = document.getElementById('message');
+    messageElement.innerHTML = message;
+    messageElement.className = type;
 }

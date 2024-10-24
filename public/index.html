@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Converter</title>
+    <title>YouTube to MP3/MP4 Converter</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="container">
         <h1>YouTube to MP3/MP4 Converter</h1>
         <input type="text" id="youtube-url" placeholder="Enter YouTube URL">
-        <button onclick="convertVideo('mp3')">Convert to MP3</button>
-        <button onclick="convertVideo('mp4')">Convert to MP4</button>
+        <div id="buttons">
+            <button onclick="convertVideo('mp3')">Convert to MP3</button>
+            <button onclick="convertVideo('mp4')">Convert to MP4</button>
+        </div>
         <div id="message"></div>
     </div>
     <script src="script.js"></script>

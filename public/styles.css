@@ -7,6 +7,7 @@ body {
     background-color: #f0f0f0;
     margin: 0;
 }
+
 #container {
     text-align: center;
     background: white;
@@ -14,6 +15,11 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+h1 {
+    color: #333;
+}
+
 input {
     width: 80%;
     padding: 10px;
@@ -21,15 +27,48 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+#buttons {
+    margin-top: 10px;
+}
+
 button {
     padding: 10px 20px;
-    margin: 10px 5px;
+    margin: 0 5px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
+
 button:hover {
     background-color: #0056b3;
+}
+
+#message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#message.error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+#message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+#message.info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+#message a {
+    color: inherit;
+    text-decoration: underline;
 }
