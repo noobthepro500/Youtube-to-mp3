@@ -24,9 +24,10 @@
                 <p><%= song_title %></p>
                 <a href="<%= song_link%>"><button id="download-btn">Download!</button></a>
             </div>
-        <% } else if (typeof success != "undefined" && !success) { &>
+        <% } else if (typeof success != "undefined" && !success) { %>
             <div class="errors">
-                <p><%= message %></p></div>
+                <p><%= message %></p>
+            </div>
         <% } %>
     </div>
 </body>
