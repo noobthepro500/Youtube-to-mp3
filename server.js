@@ -32,16 +32,20 @@ app.get('/convert', (req, res) => {
         format: format === 'mp3' ? 'bestaudio' : 'bestvideo+bestaudio'
     }).then(output => {
         if (format === 'mp3') {
-            const mp3Path = outputPath.replace('mp4', 'mp3');
+            const mp3Path = outputPath.replace('.mp4', '.mp3');
             ffmpeg(outputPath)
                 .toFormat('mp3')
                 .on('end', () => {
                     fs.unlinkSync(outputPath);
-                    res.json({ success: true, file: mp3Path });
+                    res.json({ success: true, file: `/downloads/${path.basename(mp3Path)}` });
+                })
+                .on('error', (err) => {
+                    console.error('FFmpeg error:', err);
+                    res.json({ success: false, error: 'Failed to convert to MP3' });
                 })
                 .save(mp3Path);
         } else {
-            res.json({ success: true, file: outputPath });
+            res.json({ success: true, file: `/downloads/${path.basename(outputPath)}` });
         }
     }).catch(error => {
         console.error('Error downloading video:', error);
