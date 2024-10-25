@@ -1,15 +1,15 @@
 const express = require("express");
 const fetch = require("node-fetch");
-require("dotenv").config();
-const path = require('path');
+const path = require("path");
+require("dotenv").config(); // Load environment variables
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, 'views')); 
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,12 +21,14 @@ app.get("/", (req, res) => {
 app.post("/convert-mp3", async (req, res) => {
     const videoId = req.body.videoId;
 
-    if (videoId === undefined || videoId === "" || videoId === null) {
-        return res.render("index", { success: false, message: "Please enter a video ID" });
-    } else {
-        const fetchAPI = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`, {
-            "method": "GET",
-            "headers": {
+    if (!videoId) {
+        return res.render("index", { success: false, message: "Please enter a video ID", videoId });
+    }
+
+    try {
+        const fetchAPI = await fetch(`https://${process.env.API_HOST}/dl?id=${videoId}`, {
+            method: "GET",
+            headers: {
                 "x-rapidapi-key": process.env.API_KEY,
                 "x-rapidapi-host": process.env.API_HOST
             }
@@ -38,11 +40,19 @@ app.post("/convert-mp3", async (req, res) => {
             return res.render("index", {
                 success: true,
                 song_title: fetchResponse.title,
-                song_link: fetchResponse.link
+                song_link: fetchResponse.link,
+                videoId
             });
         } else {
-            return res.render("index", { success: false, message: fetchResponse.msg });
+            return res.render("index", { success: false, message: fetchResponse.msg, videoId });
         }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return res.render("index", { 
+            success: false, 
+            message: "An error occurred while processing your request.",
+            videoId
+        });
     }
 });
 
