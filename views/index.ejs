@@ -7,17 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
   <link rel="stylesheet" href="/css/styles.css">
-  <title>YouTube 2 MP3</title>
+  <title>YouTube to MP3🚀</title>
 </head>
 
 <body>
 
   <div class="top-container">
     <form action="/convert-mp3" method="POST" id="form">
-      <h1><i class="fab fa-youtube"></i> YouTube 2 MP3 Converter</h1>
-      <h4>Enter the video ID</h4>
+      <h1><i class="fab fa-youtube"></i> YouTube to MP3 Converter</h1>
+      <h4>Convert YouTube videos without worrying about getting a virus</h4>
       <div>
-        <input type="text" name="videoId" placeholder="Video ID..."><button id="submit-btn">Convert</button>
+        <input type="text" name="videoLink" placeholder="Video ID..."><button id="submit-btn">Convert</button>
       </div>
     </form>
   </div>
@@ -26,13 +26,22 @@
     <% if (typeof success != "undefined" && success) { %>
       <div class="success">
         <p> <%= song_title %> </p>
-        <a href="<%= song_link %>"><button id="download-btn">DOWNLOAD</button></a>
+        <a href="<%= song_link %>"><button id="download-btn">Download <i class="fa-solid fa-download"></i></button></a>
       </div>
     <% } else if (typeof success != "undefined" && !success) { %>
       <div class="errors">
         <p> <%= message %> </p>
       </div>
     <% } %>
+    <div class="instructions">
+      <h3>How to use:</h3>
+      <ol>
+          <li>Copy the URL of any YouTube video you want to convert</li>
+          <li>Paste the URL in the input field above</li>
+          <li>Click the "Convert" button and wait for processing</li>
+          <li>Once converted, click the "DOWNLOAD MP3" button to save your file</li>
+      </ol>
+  </div>
   </div>
 
 </body>
