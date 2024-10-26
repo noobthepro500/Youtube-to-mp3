@@ -192,6 +192,7 @@ input[type="text"]:focus {
 @media (max-width: 480px) {
   .top-container {
     padding: 1.5rem;
+    margin-top: 3.5rem;
   }
   
   form div {
@@ -206,16 +207,31 @@ input[type="text"]:focus {
   h1 {
     font-size: 1.75rem;
   }
+
+  .theme-switch-wrapper {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 1rem;
+    gap: 0.5rem;
+    background: var(--surface-color);
+    padding: 0.5rem;
+    border-radius: 30px;
+    box-shadow: var(--shadow-sm);
+  }
 }
 
-.theme-switch-wrapper {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  z-index: 100;
+@media (min-width: 481px) {
+  .theme-switch-wrapper {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 100;
+  }
 }
 
 .theme-switch {
