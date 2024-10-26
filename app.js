@@ -26,8 +26,8 @@ app.post("/convert-mp3", async (req, res) => {
       });
     }
 
-    // Step 1: Start the download process
-    const startDownloadResponse = await fetch(`https://youtube-video-downloader-4k-and-8k-mp3.p.rapidapi.com/download.php?button=1&start=1&end=1&format=mp3&url=${videoLink}`, {
+    // Convert
+    const convertResponse = await fetch(`https://youtube-video-downloader-4k-and-8k-mp3.p.rapidapi.com/download.php?button=1&start=1&end=1&format=mp3&url=${videoLink}`, {
       "method": 'GET',
       "headers": {
         'x-rapidapi-key': process.env.API_KEY,
@@ -35,7 +35,7 @@ app.post("/convert-mp3", async (req, res) => {
       }
     });
 
-    const startData = await startDownloadResponse.json();
+    const startData = await convertResponse.json();
     if (!startData.success) {
       return res.render("index", { 
         success: false, 
