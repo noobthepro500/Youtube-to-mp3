@@ -29,7 +29,6 @@ app.post("/convert-mp3", async (req, res) => {
       });
     }
 
-    // Convert
     const convertResponse = await fetch(`https://youtube-video-downloader-4k-and-8k-mp3.p.rapidapi.com/download.php?button=1&start=1&end=1&format=mp3&url=${videoLink}`, {
       "method": 'GET',
       "headers": {
