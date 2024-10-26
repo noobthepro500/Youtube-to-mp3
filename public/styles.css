@@ -209,7 +209,7 @@ input[type="text"]:focus {
   }
 
   .theme-switch-wrapper {
-    position: fixed;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
