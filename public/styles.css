@@ -189,7 +189,7 @@ input[type="text"]:focus {
   line-height: 1.6;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .top-container {
     padding: 1.5rem;
     margin-top: 3.5rem;
@@ -222,7 +222,7 @@ input[type="text"]:focus {
   }
 }
 
-@media (min-width: 481px) {
+@media (min-width: 769px) {
   .theme-switch-wrapper {
     position: fixed;
     top: 1rem;
