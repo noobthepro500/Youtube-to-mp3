@@ -1,62 +1,76 @@
-// Required packages
+// app.js
 const express = require("express");
-// npm install node-fetch@2
 const fetch = require("node-fetch");
+require('dotenv').config();
 
-require('dotenv').config()
-
-// Create express server
 const app = express();
-
-// Indicate the port number server will run on
 const PORT = process.env.PORT || 3000;
 
-// Set template engine
 app.set("view engine", "ejs");
 app.use(express.static('public'));
-
-// Needed to parse html data for POST requests
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// GET route
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-// POST route
 app.post("/convert-mp3", async (req, res) => {
-
-  const videoId = req.body.videoId;
-  
-  if(
-    videoId === undefined ||
-    videoId === "" ||
-    videoId === null
-  ){
-    return res.render("index", { success : false, message : "Please enter a video ID"});
-  } else {
+  try {
+    let videoLink = req.body.videoLink;
     
-    const fetchAPI = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`, {
-      "method": "GET",
+    if (!videoLink) {
+      return res.render("index", { 
+        success: false, 
+        message: "Please enter a video link" 
+      });
+    }
+
+    // Step 1: Start the download process
+    const startDownloadResponse = await fetch(`https://youtube-video-downloader-4k-and-8k-mp3.p.rapidapi.com/download.php?button=1&start=1&end=1&format=mp3&url=${videoLink}`, {
+      "method": 'GET',
       "headers": {
-        "x-rapidapi-key": process.env.API_KEY,
-        "x-rapidapi-host": process.env.API_HOST
-        }
+        'x-rapidapi-key': process.env.API_KEY,
+        'x-rapidapi-host': process.env.API_HOST
+      }
     });
 
-    const fetchResponse = await fetchAPI.json();
- 
-    if(fetchResponse.status === "ok")
-      return res.render("index",{ success : true,  song_title : fetchResponse.title, song_link : fetchResponse.link})
-    else
-      return res.render("index", { success : false, message : fetchResponse.msg});
+    const startData = await startDownloadResponse.json();
+    if (!startData.success) {
+      return res.render("index", { 
+        success: false, 
+        message: "Failed to initialize download" 
+      });
+    }
+
+    const downloadId = startData.id;
+    
+    const downloadVideoResponse = await fetch(`https://youtube-video-downloader-4k-and-8k-mp3.p.rapidapi.com/progress.php?id=${downloadId}`, {
+      "method": 'GET',
+      "headers": {
+        'x-rapidapi-key': process.env.API_KEY,
+        'x-rapidapi-host': process.env.API_HOST
+      }
+    });
+
+    const downloadData = await downloadVideoResponse.json();
+
+    return res.render("index", {
+      success: true,
+      song_title: startData.info.title,
+      song_link: downloadData.download_url
+    })
+
+    
+  } catch (error) {
+    console.error('Conversion error:', error);
+    return res.render("index", {
+      success: false,
+      message: "An error occurred during conversion"
+    });
   }
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
