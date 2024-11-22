@@ -1,9 +1,6 @@
 # YouTube to MP3 Converter 🎵
 An open-source project, giving users a free and convenient way to convert YouTube videos into MP3 files.
 
-## Live Demo
-Check out the live demo of the project [here](https://convert-mp3.vercel.app/)
-
 ## Features 
 💾 Direct MP3 downloads
 
