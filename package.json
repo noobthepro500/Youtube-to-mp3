@@ -7,16 +7,15 @@
 	"scripts": {
 		"dev": "nodemon app.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "node build.js",
+		"build": "echo 'No build step required'",
 		"start": "node app.js"
 	},
 	"author": "Miguel Nunez",
 	"license": "ISC",
 	"dependencies": {
 		"dotenv": "^16.4.5",
-		"ejs": "^3.1.10",
+		"ejs": "^3.1.6",
 		"express": "^4.17.1",
-		"fs-extra": "^11.2.0",
 		"node-fetch": "^3.3.2"
 	},
 	"devDependencies": {
